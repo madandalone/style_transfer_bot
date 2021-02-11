@@ -1,0 +1,6 @@
+
+pillow==8.1.0
+aiogram==2.11.2
+async-timeout==3.0.1
+aiohttp==3.7.3
+numpy==1.19.5
