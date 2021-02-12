@@ -60,7 +60,7 @@ class Style_transfer:
     def __init__(self, style_img, content_img, imsize=256, num_steps=250,
                  style_weight=100000, content_weight=1):
 
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cpu")
 
         self.imsize = imsize
         self.style_img = self.image_loader(style_img)
