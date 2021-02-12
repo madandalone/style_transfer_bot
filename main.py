@@ -4,7 +4,6 @@ from aiogram.types import InlineKeyboardMarkup, ReplyKeyboardMarkup
 from aiogram.types import InlineKeyboardButton
 from aiogram.types import KeyboardButton
 from io import BytesIO
-import models
 from copy import deepcopy
 from style_transfer import *
 from gan import *
