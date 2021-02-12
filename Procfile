@@ -1,1 +1,1 @@
-web: python main.py 5000
+web: python main.py -p 5000
