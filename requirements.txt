@@ -5,5 +5,10 @@ async-timeout==3.0.1
 aiohttp==3.7.3
 requests==2.22.0
 numpy==1.19.5
---find-links https://download.pytorch.org/whl/torch_stable.html
-torch==1.7.1
+-f
+https://download.pytorch.org/whl/torch_stable.html
+torch==1.6.1+cpu
+
+-f
+https://download.pytorch.org/whl/torch_stable.html
+torchvision==0.8.2+cpu
