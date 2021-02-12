@@ -1,1 +1,1 @@
-web: python main.py -p 43760
+web: python main.py 8080
