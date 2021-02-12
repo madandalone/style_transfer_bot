@@ -30,12 +30,12 @@ menu = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton('Меню'))
 class User_settings:
     def __init__(self):
         self.settings = {'num_epochs': 50,
-                         'imsize': 256}
+                         'imsize'    : 256}
         self.photos = []
 
     def set_default_settings(self):
         self.settings = {'num_epochs': 50,
-                         'imsize': 256}
+                         'imsize'    : 256}
 
 @stbot.message_handler(commands=['start', 'help'])
 async def process_start_command(message: types.Message):
@@ -241,7 +241,6 @@ def log(user):
         print('type:', user.st_type)
         if user.st_type == 1 or user.st_type == 2:
             print('settings:', user.settings)
-            print('Epochs:')
         else:
             print('settings: imsize:', user.settings['imsize'])
 
