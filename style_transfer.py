@@ -147,7 +147,7 @@ class Style_transfer:
 
     async def transfer(self):
         global CNN
-        CNN = torch.load('pretrained_models/vgg19.pth', ).to(self.device).eval()
+        CNN = torch.load('./pretrained_models/vgg19.pth', ).to(self.device).eval()
         model, style_losses, content_losses = self.get_style_model_and_losses()
         optimizer = self.get_input_optimizer()
 
