@@ -12,6 +12,8 @@ LOGGING = True
 CONNECTION_TYPE = 'POLLING'
 
 logging.basicConfig(level=logging.INFO)
+BOT_TOKEN='1618791390:AAE6G5RlQR8m14_7Fg4DaiYqbqbb6Hg8vXg'
+BOT_URL="https://botstyletransfer.herokuapp.com/"
 
 bot = Bot(token='1618791390:AAE6G5RlQR8m14_7Fg4DaiYqbqbb6Hg8vXg')
 stbot = Dispatcher(bot)
@@ -257,9 +259,6 @@ def log(user):
 
 
 if __name__ == '__main__':
-    if CONNECTION_TYPE == 'POLLING':
-        executor.start_polling(stbot, skip_updates=True)
+    executor.start_polling(stbot, skip_updates=True)
 
 
-    else:
-        print("Invalid 'CONNECTION_TYPE'")
