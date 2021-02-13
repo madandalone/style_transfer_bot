@@ -27,7 +27,7 @@ menu = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton('Меню'))
 
 class User_settings:
     def __init__(self):
-        self.settings = {'num_epochs': 50,
+        self.settings = {'num_epochs': 250,
                          'imsize': 256}
         self.photos = []
 
@@ -65,7 +65,6 @@ async def style_transfer(callback_query):
 
     await callback_query.message.edit_reply_markup(reply_markup=cancel)
 
-# моне
 @stbot.callback_query_handler(lambda c: c.data == 'monet')
 async def monet(callback_query):
     await bot.answer_callback_query(callback_query.id)
