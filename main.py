@@ -160,7 +160,6 @@ async def get_image(message):
         elif input_photo[message.chat.id].need_photos == 1:
             await bot.send_message(message.chat.id, "Идет обработка. Это может занять несколько минут.")
 
-            # for debug
             log(input_photo[message.chat.id])
 
             output = await style_transfer(Style_transfer, input_photo[message.chat.id],
