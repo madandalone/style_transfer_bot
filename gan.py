@@ -1,4 +1,3 @@
-
 import numpy as np
 import torch
 import torchvision.transforms as transforms
@@ -24,11 +23,6 @@ def image_loader(image_name, imsize, device):
     image = Image.open(image_name)
     image = loader(image).unsqueeze(0)
     return image.to(device, torch.float)
-
-
-# def draw_img(img):
-#     plt.imshow(np.rollaxis(img.add(1).div(2).cpu().detach()[0].numpy(), 0, 3))
-#     plt.show()
 
 
 if __name__ == '__main__':
