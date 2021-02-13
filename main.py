@@ -29,12 +29,12 @@ menu = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton('Меню'))
 
 class User_settings:
     def __init__(self):
-        self.settings = {'num_epochs': 50,
+        self.settings = {'num_epochs': 100,
                          'imsize'    : 256}
         self.photos = []
 
     def set_default_settings(self):
-        self.settings = {'num_epochs': 50,
+        self.settings = {'num_epochs': 100,
                          'imsize'    : 256}
 
 @stbot.message_handler(commands=['start', 'help'])
@@ -52,7 +52,7 @@ async def main_menu(callback_query):
     await bot.answer_callback_query(callback_query.id)
     await callback_query.message.edit_text("Смотри, что могу:")
     await callback_query.message.edit_reply_markup(reply_markup=start)
-#
+
 @stbot.callback_query_handler(lambda c: c.data == 'st')
 async def style_transfer(callback_query):
     await bot.answer_callback_query(callback_query.id)
@@ -72,7 +72,7 @@ async def style_transfer(callback_query):
 
     input_photo[callback_query.from_user.id].set_default_settings()
 
-# vangogh
+
 @stbot.callback_query_handler(lambda c: c.data == 'monet')
 async def monet(callback_query):
     await bot.answer_callback_query(callback_query.id)
@@ -111,7 +111,7 @@ async def get_example(message):
         await bot.send_message(message.chat.id,
                                "Я твой персональный раб по переносу стиля. " +
                                "Я могу клево обработать твою фоточку.\n", reply_markup=start)
-# load images
+
 @stbot.callback_query_handler(lambda c: c.data == 'next')
 async def load_images(callback_query):
 
@@ -245,16 +245,6 @@ def log(user):
             print('settings: imsize:', user.settings['imsize'])
 
 
-# def draw_img(img):
-#     plt.imshow(np.rollaxis(img.cpu().detach()[0].numpy(), 0, 3))
-#     plt.show()
-#
-#
-# def draw_photo(*photos):
-#     for photo in photos:
-#         img = np.array(Image.open(photo))
-#         plt.imshow(img)
-#         plt.show()
 
 
 if __name__ == '__main__':
