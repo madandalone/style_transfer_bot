@@ -135,15 +135,6 @@ class Style_transfer:
         optimizer = optim.LBFGS([self.input_img.requires_grad_()])
         return optimizer
 
-    # async def test(self):
-    #     num = 0
-    #     while num < 20:
-    #         num += 1
-    #         print(num)
-    #
-    #         await asyncio.sleep(1)
-    #
-    #     return num
 
     async def transfer(self):
         global CNN
