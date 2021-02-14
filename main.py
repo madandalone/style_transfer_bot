@@ -28,7 +28,7 @@ menu = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton('Меню'))
 
 class User_settings:
     def __init__(self):
-        self.settings = {'num_epochs': 50,
+        self.settings = {'num_epochs': 250,
                          'imsize': 256}
         self.photos = []
 
