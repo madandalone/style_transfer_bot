@@ -82,7 +82,7 @@ async def monet(callback_query):
 
     if input_photo[callback_query.from_user.id].st_type == 'monet':
         await callback_query.message.edit_text(
-                                               "Пришли мне фоточку (документом!), и я добавлю на нее стиль Клода Моне.")
+                                               "Пришли мне фоточку, и я добавлю на нее стиль Клода Моне.")
 
         input_photo[callback_query.from_user.id].need_photos = 1
 
@@ -245,10 +245,5 @@ def draw_photo(*photos):
 
 
 if __name__ == '__main__':
-    if CONNECTION_TYPE == 'POLLING':
-        executor.start_polling(stbot, skip_updates=True)
+    executor.start_polling(stbot, skip_updates=True)
 
-
-
-    else:
-        print("Invalid 'CONNECTION_TYPE'")
