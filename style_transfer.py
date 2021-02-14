@@ -143,31 +143,38 @@ class Style_transfer:
         optimizer = self.get_input_optimizer()
 
         run = [0]
-
         while run[0] <= self.num_steps:
+            print(run[0])
+
             await asyncio.sleep(2)
+
             def closure():
                 self.input_img.data.clamp_(0, 1)
+
                 optimizer.zero_grad()
+
                 model(self.input_img)
+
                 style_score = 0
                 content_score = 0
+
                 for sl in style_losses:
                     style_score += sl.loss
                 for cl in content_losses:
                     content_score += cl.loss
+
                 style_score *= self.style_weight
                 content_score *= self.content_weight
+
                 loss = style_score + content_score
                 loss.backward()
-                run[0] += 1
-                if run[0] % 50 == 0:
-                    print("run {}:".format(run))
-                    print('Style Loss : {:4f} Content Loss: {:4f}'.format(
-                        style_score.item(), content_score.item()))
-                    print()
-                return style_score + content_score
-            optimizer.step(closure)
-        self.input_img.data.clamp_(0, 1)
-        return self.input_img
 
+                run[0] += 1
+
+                return style_score + content_score
+
+            optimizer.step(closure)
+
+        self.input_img.data.clamp_(0, 1)
+
+        return self.input_img
