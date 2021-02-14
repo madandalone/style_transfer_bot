@@ -193,7 +193,6 @@ async def get_image(message):
                                "Еще разок обработаем фоточку?", reply_markup=start)
 
         del input_photo[message.chat.id]
-
 async def style_transfer(st_class, user, *imgs):
     st = st_class(*imgs,
                   imsize=user.settings['imsize'],
@@ -211,7 +210,6 @@ def gan_transfer(user, img):
                       imsize=user.settings['imsize'])
 
     return tensor2img(output.add(1).div(2))
-
 
 
 def tensor2img(t):
@@ -251,7 +249,8 @@ def draw_photo(*photos):
 
 if __name__ == '__main__':
     if CONNECTION_TYPE == 'POLLING':
-        executor.start_polling(stbot, skip_updates=True)
+        executor.start_polling(dp, skip_updates=True)
+
 
 
     else:
