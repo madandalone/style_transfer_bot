@@ -6,7 +6,7 @@ from PIL import Image
 
 def transfer(img_path, imsize=512):
     device = torch.device("cpu")
-    model=torch.load("./pretrained_models/monet.pth").to(device)
+    model=torch.load("./pretrained_models/monet.pth", map_location='cpu').to(device)
     img = image_loader(img_path, imsize, device)
 
     for p in model.parameters():
