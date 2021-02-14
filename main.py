@@ -1,4 +1,5 @@
 import logging
+from PIL import Image
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, ReplyKeyboardMarkup
 from aiogram.types import InlineKeyboardButton
