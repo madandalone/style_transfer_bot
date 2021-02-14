@@ -249,7 +249,7 @@ def draw_photo(*photos):
 
 if __name__ == '__main__':
     if CONNECTION_TYPE == 'POLLING':
-        executor.start_polling(dp, skip_updates=True)
+        executor.start_polling(stbot, skip_updates=True)
 
 
 
