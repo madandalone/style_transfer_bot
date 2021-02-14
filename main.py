@@ -160,15 +160,15 @@ def tensor2img(t):
     return bio
 
 
-# def log(user):
-#     if LOGGING:
-#         print()
-#         print('type:', user.st_type)
-#         if user.st_type == 1 or user.st_type == 2:
-#             print('settings:', user.settings)
-#             print('Epochs:')
-#         else:
-#             print('settings: imsize:', user.settings['imsize'])
+def log(user):
+    if LOGGING:
+        print()
+        print('type:', user.st_type)
+        if user.st_type == 1 or user.st_type == 2:
+            print('settings:', user.settings)
+            print('Epochs:')
+        else:
+            print('settings: imsize:', user.settings['imsize'])
 
 
 def draw_img(img):
