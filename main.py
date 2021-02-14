@@ -5,6 +5,7 @@ from aiogram.types import InlineKeyboardMarkup, ReplyKeyboardMarkup
 from aiogram.types import InlineKeyboardButton
 from aiogram.types import KeyboardButton
 from io import BytesIO
+import numpy as np
 from copy import deepcopy
 from style_transfer import *
 
@@ -159,15 +160,15 @@ def tensor2img(t):
     return bio
 
 
-def log(user):
-    if LOGGING:
-        print()
-        print('type:', user.st_type)
-        if user.st_type == 1 or user.st_type == 2:
-            print('settings:', user.settings)
-            print('Epochs:')
-        else:
-            print('settings: imsize:', user.settings['imsize'])
+# def log(user):
+#     if LOGGING:
+#         print()
+#         print('type:', user.st_type)
+#         if user.st_type == 1 or user.st_type == 2:
+#             print('settings:', user.settings)
+#             print('Epochs:')
+#         else:
+#             print('settings: imsize:', user.settings['imsize'])
 
 
 def draw_img(img):
