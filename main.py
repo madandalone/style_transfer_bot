@@ -20,7 +20,7 @@ stbot = Dispatcher(bot)
 input_photo = {}
 
 start = InlineKeyboardMarkup().add(InlineKeyboardButton('Перенос выбранного стиля',
-                               callback_data='st')).add(InlineKeyboardButton('Картина Клода Моне (пока не работает)',
+                               callback_data='st')).add(InlineKeyboardButton('Стилизация под картину Клода Моне',
                                callback_data='monet'))
 cancel = InlineKeyboardMarkup().add(InlineKeyboardButton('Отмена', callback_data='main_menu'))
 
