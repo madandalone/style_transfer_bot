@@ -20,7 +20,7 @@ stbot = Dispatcher(bot)
 input_photo = {}
 
 start = InlineKeyboardMarkup().add(InlineKeyboardButton('Перенос выбранного стиля',
-                               callback_data='st')).add(InlineKeyboardButton('Стилизация под картину Клода Моне (пока не работает)',
+                               callback_data='st')).add(InlineKeyboardButton('Стилизация под картину Клода Моне \n (пока не работает)',
                                callback_data='monet'))
 cancel = InlineKeyboardMarkup().add(InlineKeyboardButton('Отмена', callback_data='main_menu'))
 
@@ -105,23 +105,23 @@ async def get_example(message):
                                "Я твой персональный раб по переносу стиля. " +
                                "Я могу клево обработать твою фоточку.\n", reply_markup=start)
 
-@stbot.callback_query_handler(lambda c: c.data == 'next')
-async def load_images(callback_query):
+# @stbot.callback_query_handler(lambda c: c.data == 'next')
+# async def load_images(callback_query):
 
-    if input_photo[callback_query.from_user.id].st_type == 1:
-        await callback_query.message.edit_text(
-                                               "Пришли мне фоточку, стиль с которой нужно перенести.")
+#     if input_photo[callback_query.from_user.id].st_type == 1:
+#         await callback_query.message.edit_text(
+#                                                "Пришли мне фоточку, стиль с которой нужно перенести.")
 
-        input_photo[callback_query.from_user.id].need_photos = 2
+#         input_photo[callback_query.from_user.id].need_photos = 2
 
-    elif input_photo[callback_query.from_user.id].st_type == 'monet':
-        await callback_query.message.edit_text(
-                                               "Пришли мне фоточку, и я добавлю на нее стиль Клода Моне.")
+#     elif input_photo[callback_query.from_user.id].st_type == 'monet':
+#         await callback_query.message.edit_text(
+#                                                "Пришли мне фоточку, и я добавлю на нее стиль Клода Моне.")
 
-        input_photo[callback_query.from_user.id].need_photos = 1
+#         input_photo[callback_query.from_user.id].need_photos = 1
 
 
-    await callback_query.message.edit_reply_markup(reply_markup=cancel)
+#     await callback_query.message.edit_reply_markup(reply_markup=cancel)
 
 @stbot.message_handler(content_types=['photo', 'document'])
 async def get_image(message):
