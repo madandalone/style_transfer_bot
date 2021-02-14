@@ -21,8 +21,7 @@ input_photo = {}
 
 start = InlineKeyboardMarkup().add(InlineKeyboardButton('Перенос выбранного стиля',
                                callback_data='st')).add(InlineKeyboardButton('Стилизация под картину Клода Моне \n (пока не работает)',
-                               callback_data='monet')).add(InlineKeyboardButton('Стилизация под картину Клода Моне \n (пока не работает)',
-                               callback_data='style1'))
+                               callback_data='monet'))
 cancel = InlineKeyboardMarkup().add(InlineKeyboardButton('Отмена', callback_data='main_menu'))
 
 menu = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton('Меню')).add('Показать пример')
@@ -67,26 +66,7 @@ async def style_transfer(callback_query):
 
     await callback_query.message.edit_reply_markup(reply_markup=cancel)
 
-@stbot.callback_query_handler(lambda c: c.data == 'style1')
-async def style1(callback_query):
-    await bot.answer_callback_query(callback_query.id)
 
-    await callback_query.message.edit_text(
-        "Твоя фоточка будет обработана в стиле картины . " +
-        "Выбери желаемый режим работы:")
-
-    if callback_query.from_user.id not in input_photo:
-        input_photo[callback_query.from_user.id] = User_settings()
-
-    input_photo[callback_query.from_user.id].st_type = 'style1'
-
-    if input_photo[callback_query.from_user.id].st_type == 'style1':
-        await callback_query.message.edit_text(
-                                               "Пришли мне фоточку, и я добавлю на нее стиль .")
-
-        input_photo[callback_query.from_user.id].need_photos = 1
-
-    await callback_query.message.edit_reply_markup(reply_markup=cancel)
 @stbot.callback_query_handler(lambda c: c.data == 'monet')
 async def monet(callback_query):
     await bot.answer_callback_query(callback_query.id)
@@ -125,23 +105,6 @@ async def get_example(message):
                                "Я твой персональный раб по переносу стиля. " +
                                "Я могу клево обработать твою фоточку.\n", reply_markup=start)
 
-# @stbot.callback_query_handler(lambda c: c.data == 'next')
-# async def load_images(callback_query):
-
-#     if input_photo[callback_query.from_user.id].st_type == 1:
-#         await callback_query.message.edit_text(
-#                                                "Пришли мне фоточку, стиль с которой нужно перенести.")
-
-#         input_photo[callback_query.from_user.id].need_photos = 2
-
-#     elif input_photo[callback_query.from_user.id].st_type == 'monet':
-#         await callback_query.message.edit_text(
-#                                                "Пришли мне фоточку, и я добавлю на нее стиль Клода Моне.")
-
-#         input_photo[callback_query.from_user.id].need_photos = 1
-
-
-#     await callback_query.message.edit_reply_markup(reply_markup=cancel)
 
 @stbot.message_handler(content_types=['photo', 'document'])
 async def get_image(message):
@@ -212,22 +175,6 @@ async def get_image(message):
 
         del input_photo[message.chat.id]
     
-    elif input_photo[message.chat.id].st_type in ['style1'] and \
-            input_photo[message.chat.id].need_photos == 1:
-        await bot.send_message(message.chat.id, "Идет обработка. Это может занять несколько минут.")
-        media = types.MediaGroup()
-        media.attach_photo(types.InputFile('hello.jpg'))
-        log(input_photo[message.chat.id])
-
-        output = await style_transfer(Style_transfer, input_photo[message.chat.id],
-                                          input_photo[message.chat.id].photos[0], media)
-
-        await bot.send_document(message.chat.id, deepcopy(output))
-        await bot.send_photo(message.chat.id, output)
-        await bot.send_message(message.chat.id,
-                               "Еще разок обработаем фоточку?", reply_markup=start)
-
-        del input_photo[message.chat.id]
 async def style_transfer(st_class, user, *imgs):
     st = st_class(*imgs,
                   num_steps=user.settings['num_epochs'],
