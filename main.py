@@ -27,7 +27,7 @@ menu = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton('Меню'))
 
 class User_settings:
     def __init__(self):
-        self.settings = {'num_epochs': 50,
+        self.settings = {'num_epochs': 200,
                          'imsize': 256}
         self.photos = []
 
@@ -65,9 +65,7 @@ async def style_transfer(callback_query):
 
     await callback_query.message.edit_reply_markup(reply_markup=cancel)
 
-    # input_photo[callback_query.from_user.id].set_default_settings()
 
-# моне
 @stbot.callback_query_handler(lambda c: c.data == 'monet')
 async def monet(callback_query):
     await bot.answer_callback_query(callback_query.id)
@@ -89,8 +87,6 @@ async def monet(callback_query):
 
     await callback_query.message.edit_reply_markup(reply_markup=cancel)
 
-    # input_photo[callback_query.from_user.id].set_default_settings()
-
 @stbot.message_handler(content_types=['text'])
 async def get_example(message):
     print(message["text"])
@@ -106,7 +102,8 @@ async def get_example(message):
         await bot.send_message(message.chat.id,
                                "Я твой персональный раб по переносу стиля. " +
                                "Я могу клево обработать твою фоточку.\n", reply_markup=start)
-# load images
+
+        
 @stbot.callback_query_handler(lambda c: c.data == 'next')
 async def load_images(callback_query):
 
@@ -164,7 +161,7 @@ async def get_image(message):
         elif input_photo[message.chat.id].need_photos == 1:
             await bot.send_message(message.chat.id, "Идет обработка. Это может занять несколько минут.")
 
-            # for debug
+         
             log(input_photo[message.chat.id])
 
             output = await style_transfer(Style_transfer, input_photo[message.chat.id],
