@@ -20,8 +20,7 @@ stbot = Dispatcher(bot)
 input_photo = {}
 
 start = InlineKeyboardMarkup().add(InlineKeyboardButton('Перенос выбранного стиля',
-                               callback_data='st')).add(InlineKeyboardButton('Стилизация под картину Клода Моне',
-                               callback_data='monet'))
+                               callback_data='st'))
 cancel = InlineKeyboardMarkup().add(InlineKeyboardButton('Отмена', callback_data='main_menu'))
 
 menu = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton('Меню')).add('Показать пример')
@@ -63,28 +62,6 @@ async def style_transfer(callback_query):
                                                "Пришли мне фоточку, стиль с которой нужно перенести.")
 
         input_photo[callback_query.from_user.id].need_photos = 2
-
-    await callback_query.message.edit_reply_markup(reply_markup=cancel)
-
-
-@stbot.callback_query_handler(lambda c: c.data == 'monet')
-async def monet(callback_query):
-    await bot.answer_callback_query(callback_query.id)
-
-    await callback_query.message.edit_text(
-        "Твоя фоточка будет обработана в стиле картины Клода Моне. " +
-        "Выбери желаемый режим работы:")
-
-    if callback_query.from_user.id not in input_photo:
-        input_photo[callback_query.from_user.id] = User_settings()
-
-    input_photo[callback_query.from_user.id].st_type = 'monet'
-
-    if input_photo[callback_query.from_user.id].st_type == 'monet':
-        await callback_query.message.edit_text(
-                                               "Пришли мне фоточку, и я добавлю на нее стиль Клода Моне.")
-
-        input_photo[callback_query.from_user.id].need_photos = 1
 
     await callback_query.message.edit_reply_markup(reply_markup=cancel)
 
@@ -159,21 +136,6 @@ async def get_image(message):
             del input_photo[message.chat.id]
 
 
-    elif input_photo[message.chat.id].st_type in ['monet'] and \
-            input_photo[message.chat.id].need_photos == 1:
-        await bot.send_message(message.chat.id, "Идет обработка. Это может занять несколько минут.")
-
-        log(input_photo[message.chat.id])
-
-        output = gan_transfer(input_photo[message.chat.id],
-                              input_photo[message.chat.id].photos[0])
-
-        await bot.send_document(message.chat.id, deepcopy(output))
-        await bot.send_photo(message.chat.id, output)
-        await bot.send_message(message.chat.id,
-                               "Еще разок обработаем фоточку?", reply_markup=start)
-
-        del input_photo[message.chat.id]
     
 async def style_transfer(st_class, user, *imgs):
     st = st_class(*imgs,
@@ -184,13 +146,6 @@ async def style_transfer(st_class, user, *imgs):
 
     return tensor2img(output)
 
-
-def gan_transfer(user, img):
-    output = transfer(img,
-                      style=user.st_type,
-                      imsize=user.settings['imsize'])
-
-    return tensor2img(output.add(1).div(2))
 
 
 def tensor2img(t):
