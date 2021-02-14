@@ -182,7 +182,7 @@ async def get_image(message):
         elif input_photo[message.chat.id].need_photos == 1:
             await bot.send_message(message.chat.id, "Идет обработка. Это может занять несколько минут.")
 
-            # for debug
+        
             log(input_photo[message.chat.id])
 
             output = await style_transfer(Style_transfer, input_photo[message.chat.id],
@@ -215,7 +215,8 @@ async def get_image(message):
     elif input_photo[message.chat.id].st_type in ['style1'] and \
             input_photo[message.chat.id].need_photos == 1:
         await bot.send_message(message.chat.id, "Идет обработка. Это может занять несколько минут.")
-      	sticker = open('hello.jpg', 'rb')
+        media = types.MediaGroup()
+        media.attach_photo(types.InputFile('hello.jpg'))
         log(input_photo[message.chat.id])
 
         output = await style_transfer(Style_transfer, input_photo[message.chat.id],
