@@ -196,7 +196,7 @@ async def get_image(message):
         del input_photo[message.chat.id]
 async def style_transfer(st_class, user, *imgs):
     st = st_class(*imgs,
-                  imsize=user.settings['imsize'],
+   #               imsize=user.settings['imsize'],
                   num_steps=user.settings['num_epochs'],
                   style_weight=100000, content_weight=1)
 
