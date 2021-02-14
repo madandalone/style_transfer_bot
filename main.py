@@ -220,7 +220,7 @@ async def get_image(message):
         log(input_photo[message.chat.id])
 
         output = await style_transfer(Style_transfer, input_photo[message.chat.id],
-                                          input_photo[message.chat.id].photos[0], sticker )
+                                          input_photo[message.chat.id].photos[0], media)
 
         await bot.send_document(message.chat.id, deepcopy(output))
         await bot.send_photo(message.chat.id, output)
