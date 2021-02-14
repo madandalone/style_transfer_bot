@@ -20,7 +20,7 @@ stbot = Dispatcher(bot)
 input_photo = {}
 
 start = InlineKeyboardMarkup().add(InlineKeyboardButton('Перенос выбранного стиля',
-                               callback_data='st')).add(InlineKeyboardButton('Стилизация под картину Клода Моне',
+                               callback_data='st')).add(InlineKeyboardButton('Стилизация под картину Клода Моне (пока не работает)',
                                callback_data='monet'))
 cancel = InlineKeyboardMarkup().add(InlineKeyboardButton('Отмена', callback_data='main_menu'))
 
@@ -28,7 +28,7 @@ menu = ReplyKeyboardMarkup(resize_keyboard=True).add(KeyboardButton('Меню'))
 
 class User_settings:
     def __init__(self):
-        self.settings = {'num_epochs': 250,
+        self.settings = {'num_epochs': 150,
                          'imsize': 256}
         self.photos = []
 
