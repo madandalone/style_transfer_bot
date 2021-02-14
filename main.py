@@ -7,8 +7,7 @@ from io import BytesIO
 from copy import deepcopy
 from style_transfer import *
 from gan import *
-import sys
-sys.path.insert(0, './main')
+
 LOGGING = True
 CONNECTION_TYPE = 'POLLING'
 
