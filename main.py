@@ -66,9 +66,7 @@ async def style_transfer(callback_query):
 
     await callback_query.message.edit_reply_markup(reply_markup=cancel)
 
-    # input_photo[callback_query.from_user.id].set_default_settings()
 
-# моне
 @stbot.callback_query_handler(lambda c: c.data == 'monet')
 async def monet(callback_query):
     await bot.answer_callback_query(callback_query.id)
@@ -90,7 +88,6 @@ async def monet(callback_query):
 
     await callback_query.message.edit_reply_markup(reply_markup=cancel)
 
-    # input_photo[callback_query.from_user.id].set_default_settings()
 
 @stbot.message_handler(content_types=['text'])
 async def get_example(message):
@@ -107,7 +104,7 @@ async def get_example(message):
         await bot.send_message(message.chat.id,
                                "Я твой персональный раб по переносу стиля. " +
                                "Я могу клево обработать твою фоточку.\n", reply_markup=start)
-# load images
+
 @stbot.callback_query_handler(lambda c: c.data == 'next')
 async def load_images(callback_query):
 
@@ -196,7 +193,6 @@ async def get_image(message):
         del input_photo[message.chat.id]
 async def style_transfer(st_class, user, *imgs):
     st = st_class(*imgs,
-   #               imsize=user.settings['imsize'],
                   num_steps=user.settings['num_epochs'],
                   style_weight=100000, content_weight=1)
 
