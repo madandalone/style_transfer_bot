@@ -4,6 +4,7 @@ async-generator==1.10
 async-timeout==3.0.1
 aiohttp==3.7.3
 requests==2.22.0
+matplotlib>=3.2.2
 numpy==1.19.5
 torch==1.7.1+cpu 
 torchvision==0.8.2+cpu 

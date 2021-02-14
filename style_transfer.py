@@ -135,19 +135,10 @@ class Style_transfer:
         optimizer = optim.LBFGS([self.input_img.requires_grad_()])
         return optimizer
 
-    # async def test(self):
-    #     num = 0
-    #     while num < 20:
-    #         num += 1
-    #         print(num)
-    #
-    #         await asyncio.sleep(1)
-    #
-    #     return num
 
     async def transfer(self):
         global CNN
-        CNN = torch.load('./pretrained_models/vgg19.pth', map_location='cpu' ).to(self.device).eval()
+        CNN = torch.load('pretrained_models/vgg19.pth').to(self.device).eval()
         model, style_losses, content_losses = self.get_style_model_and_losses()
         optimizer = self.get_input_optimizer()
 
@@ -187,4 +178,3 @@ class Style_transfer:
         self.input_img.data.clamp_(0, 1)
 
         return self.input_img
-
