@@ -6,7 +6,6 @@ from PIL import Image
 
 def transfer(img_path, imsize=512):
     device = torch.device("cpu")
-    model = Autoencoder((3, 48, 48), 256)
     model.load_state_dict(torch.load("./pretrained_models/monet.pth"))
     #model=torch.load("./pretrained_models/monet.pth").to(device)
     img = image_loader(img_path, imsize, device)
