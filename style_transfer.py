@@ -57,7 +57,7 @@ class Normalization(nn.Module):
 
 
 class Style_transfer:
-    def __init__(self, style_img, content_img, imsize=512, num_steps=300,
+    def __init__(self, style_img, content_img, imsize=256, num_steps=300,
                  style_weight=100000, content_weight=1):
 
         self.device = torch.device("cpu")
