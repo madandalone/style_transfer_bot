@@ -14,7 +14,7 @@ CONNECTION_TYPE = 'POLLING'
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token='1636425876:AAEKdSB_c9mOF9Ry_2xC8iBkz7CjbmYRtjk')
+bot = Bot(token=TOKEN)
 stbot = Dispatcher(bot)
 
 input_photo = {}
